@@ -1,3 +1,5 @@
+const listarProdutos = document.querySelector("[listarProdutos]");
+
 function carregarProdutos() {
   fetch("/api/listar")
     .then((resposta) => resposta.json())
@@ -11,6 +13,13 @@ function carregarProdutos() {
         const linhaNome = document.createElement("td");
         const linhaPreco = document.createElement("td");
         const linhaQuantidade = document.createElement("td");
+        const linhaAcoes = document.createElement("td");
+
+        const botaoEditar = document.createElement("button");
+        const botaoDelete = document.createElement("button");
+
+        botaoEditar.textContent = "Editar";
+        botaoDelete.textContent = "Excluir";
 
         linhaID.textContent = item.id;
         linhaNome.textContent = item.nome;
@@ -30,4 +39,9 @@ function carregarProdutos() {
       });
     });
 }
+
+listarProdutos.addEventListener("click", () => {
+  window.location.href = "/";
+});
+
 window.onload = carregarProdutos;

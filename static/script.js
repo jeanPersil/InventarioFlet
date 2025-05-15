@@ -17,7 +17,7 @@ formProdutos.addEventListener("submit", (e) => {
     isInvalido(precoDoProduto.value) ||
     isInvalido(quantidade)
   ) {
-    console.log("tenis");
+    alert("Por favor, insira valores validos.");
     return;
   }
   fetch("/api/adicionar", {
