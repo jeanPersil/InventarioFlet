@@ -57,7 +57,10 @@ def listagemDeProdutos():
     conn = sqlite3.connect('estoque.db')
     cursor = conn.cursor()
     cursor.execute('SELECT id, nome, preco, quantidade FROM produtos')
-    produtos =[linha[0] for linha in cursor.fetchall()]
+    produtos = [
+    {"id": linha[0], "nome": linha[1], "preco": linha[2], "quantidade": linha[3]}
+    for linha in cursor.fetchall()
+]
     conn.close()
     return jsonify(produtos)
 

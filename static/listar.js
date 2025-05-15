@@ -14,16 +14,21 @@ function carregarProdutos() {
 
         linhaID.textContent = item.id;
         linhaNome.textContent = item.nome;
-        linhaPreco.textContent = item.preco.toFixed(2);
+        linhaPreco.textContent =
+          item.preco != null ? item.preco.toFixed(2) : "0.00";
         linhaQuantidade.textContent = item.quantidade;
 
         linha.appendChild(linhaID);
         linha.appendChild(linhaNome);
         linha.appendChild(linhaPreco);
         linha.appendChild(linhaQuantidade);
-        listaProduto.appendChild(linhaID);
+
+        listaProduto.appendChild(linha);
+
+        console.log(
+          `Id: ${item.id}, nome: ${item.nome}, preco: ${item.preco}, quantidade: ${item.quantidade}`
+        );
       });
     });
 }
-
 window.onload = carregarProdutos;
