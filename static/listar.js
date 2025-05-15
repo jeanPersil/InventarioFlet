@@ -14,8 +14,7 @@ function carregarProdutos() {
 
         linhaID.textContent = item.id;
         linhaNome.textContent = item.nome;
-        linhaPreco.textContent =
-          item.preco != null ? item.preco.toFixed(2) : "0.00";
+        linhaPreco.textContent = `R$ ${item.preco.toFixed(2)}`;
         linhaQuantidade.textContent = item.quantidade;
 
         linha.appendChild(linhaID);

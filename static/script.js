@@ -8,6 +8,18 @@ formProdutos.addEventListener("submit", (e) => {
   const precoDoProduto = document.getElementById("precoDoProduto");
   const quantidade = document.getElementById("quantidade");
 
+  function isInvalido(valor) {
+    return valor === "" || valor < 0;
+  }
+
+  if (
+    isInvalido(nomeDoProduto.value) ||
+    isInvalido(precoDoProduto.value) ||
+    isInvalido(quantidade)
+  ) {
+    console.log("tenis");
+    return;
+  }
   fetch("/api/adicionar", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
