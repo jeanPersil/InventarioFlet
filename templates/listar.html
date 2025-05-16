@@ -17,14 +17,30 @@
               <th>Produto</th>
               <th>Preço</th>
               <th>Quantidade</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody listaProduto></tbody>
         </table>
-        <button listarProdutos>Add novo item</button>
       </div>
+      <button listarProdutos>Add novo item</button>
     </main>
 
+    <div class="modal">
+      <form id="formModal">
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome_input" />
+
+        <label for="preco">Preco</label>
+        <input type="number" name="preco" id="preco_input" step="0.01" />
+
+        <label for="quantidade">quantidade</label>
+        <input type="number" name="quantidade" id="quantidade_input" />
+
+        <button type="submit">Salvar</button>
+        <button type="button" id="cancelar">Cancelar</button>
+      </form>
+    </div>
     <script src="../static/listar.js"></script>
   </body>
 </html>

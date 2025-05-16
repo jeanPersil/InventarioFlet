@@ -60,9 +60,46 @@ def listagemDeProdutos():
     produtos = [
     {"id": linha[0], "nome": linha[1], "preco": linha[2], "quantidade": linha[3]}
     for linha in cursor.fetchall()
-]
+    ]
     conn.close()
     return jsonify(produtos)
+
+@app.route("/api/editar", methods=["PUT"])
+def editarProdutos():
+    dados = request.json
+    
+    id = dados['id']
+    novo_nome = dados['nome']
+    novo_preco = dados['preco']
+    nova_quantidade = dados['quantidade']
+
+    conn = sqlite3.connect("estoque.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+    UPDATE produtos
+    SET nome = ?, preco = ?, quantidade = ?
+    WHERE id = ?
+""", (novo_nome, novo_preco, nova_quantidade, id))
+    
+    conn.commit()
+    conn.close()
+
+    return jsonify({'mensagem': 'produto editado com sucesso!' })
+
+
+@app.route('/api/deletar', methods=['DELETE'])
+
+def excluirProduto():
+    dados = request.json
+
+    id = dados["id"]
+    conn = sqlite3.connect("estoque.db")
+    cursor = conn.cursor()
+    cursor.execute('''DELETE FROM produtos WHERE id = ?;''', (id,))
+    conn.commit()
+    conn.close()
+
+    return jsonify({"mensagem" : "Produto excluido"});
 
 
 if __name__ == '__main__':
