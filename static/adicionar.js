@@ -1,3 +1,5 @@
+import { adicionarProduto } from "./api.js";
+
 const formProdutos = document.getElementById("formProdutos");
 const listarProdutos = document.querySelector("[listarProdutos]");
 
@@ -20,22 +22,17 @@ formProdutos.addEventListener("submit", (e) => {
     alert("Por favor, insira valores validos.");
     return;
   }
-  fetch("/api/adicionar", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      nome: nomeDoProduto.value,
-      preco: parseFloat(precoDoProduto.value),
-      quantidade: parseFloat(quantidade.value),
-    }),
-  })
-    .then((resposta) => resposta.json())
-    .then((data) => {
-      alert(data.mensagem);
-      nomeDoProduto.value = "";
-      precoDoProduto.value = "";
-      quantidade.value = "";
-    });
+
+  adicionarProduto({
+    nome: nomeDoProduto.value,
+    preco: parseFloat(precoDoProduto.value),
+    quantidade: parseFloat(quantidade.value),
+  }).then((data) => {
+    alert(data.mensagem);
+    nomeDoProduto.value = "";
+    precoDoProduto.value = "";
+    quantidade.value = "";
+  });
 });
 
 listarProdutos.addEventListener("click", () => {
