@@ -1,4 +1,5 @@
 import { adicionarProduto } from "./api.js";
+import { verificarValoresFalsos } from "./utils/validacoes.js";
 
 const formProdutos = document.getElementById("formProdutos");
 const listarProdutos = document.querySelector("[listarProdutos]");
@@ -10,14 +11,10 @@ formProdutos.addEventListener("submit", (e) => {
   const precoDoProduto = document.getElementById("precoDoProduto");
   const quantidade = document.getElementById("quantidade");
 
-  function isInvalido(valor) {
-    return valor === "" || valor < 0;
-  }
-
   if (
-    isInvalido(nomeDoProduto.value) ||
-    isInvalido(precoDoProduto.value) ||
-    isInvalido(quantidade)
+    verificarValoresFalsos(nomeDoProduto.value) ||
+    verificarValoresFalsos(precoDoProduto.value) ||
+    verificarValoresFalsos(quantidade)
   ) {
     alert("Por favor, insira valores validos.");
     return;
