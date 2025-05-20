@@ -18,6 +18,7 @@ Este é um projeto simples desenvolvido com o objetivo de **praticar os conceito
 ## 🎯 Objetivo
 
 > O projeto foi criado com fins **educacionais** para praticar:
+
 - Estrutura básica de uma aplicação Flask.
 - Criação de rotas e APIs REST.
 - Comunicação entre o frontend (JavaScript) e backend (Flask).
@@ -39,13 +40,16 @@ Este é um projeto simples desenvolvido com o objetivo de **praticar os conceito
 ## 🖼️ Capturas de Tela
 
 ### 🔐 Tela de Login
-<img src="assets/tela-login.png" alt="Tela de Login" width="600"/>
+
+<img src="assets/telaLogin.png" alt="Tela de Login" width="600"/>
 
 ### ➕ Página de Adição de Produtos
-<img src="assets/tela-adicionar.png" alt="Adicionar Produto" width="600"/>
+
+<img src="assets/telaAdicionar.png" alt="Adicionar Produto" width="600"/>
 
 ### 📋 Página de Listagem de Produtos
-<img src="assets/tela-listagem.png" alt="Listagem" width="600"/>
+
+<img src="assets/telaLista.png" alt="Listagem" width="600"/>
 
 ## ▶️ Como executar
 
@@ -54,6 +58,7 @@ Este é um projeto simples desenvolvido com o objetivo de **praticar os conceito
 3. Instale o Flask (caso ainda não tenha):
    ```bash
    pip install flask
+   ```
 
 python app.py
 
