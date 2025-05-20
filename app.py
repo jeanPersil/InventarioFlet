@@ -18,17 +18,75 @@ def criar_banco():
     conn.commit()
     conn.close()
 
+
+def criarLoginAdmin():
+    conn = sqlite3.connect("estoque.db")
+    cursor = conn.cursor()
+
+    cursor.execute(''' 
+        CREATE TABLE IF NOT EXISTS loginUsuarios (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            usuario TEXT UNIQUE NOT NULL,
+            senha TEXT NOT NULL,
+            tipo TEXT NOT NULL
+        )
+    ''')
+
+    try:
+        cursor.execute('''
+            INSERT INTO loginUsuarios (usuario, senha, tipo)
+            VALUES (?, ?, ?)
+        ''', ('admin', 'admin123', 'admin'))
+    except sqlite3.IntegrityError:
+        print("Usuário 'admin' já existe.")
+
+    conn.commit()
+    conn.close()
+
+
+
+criarLoginAdmin()
 criar_banco()
 
-@app.route("/")
+
+
+@app.route('/')
+def login():
+    return render_template('login.html')
+
+
+@app.route("/api/pagAdicionar")
 def home():
     return render_template("/adicionar.html")
+
 
 @app.route("/paginaListar")
 def pagListar():
     return render_template("/listar.html")
 
 
+@app.route("/api/login", methods=["POST"])
+def logarUsuario():
+    dados = request.json
+    usuario = dados["user"]
+    senha = dados["senha"]
+
+    conn = sqlite3.connect("estoque.db")
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT * FROM loginUsuarios
+        WHERE usuario = ? AND senha = ?
+    ''', (usuario, senha))
+
+    resultado = cursor.fetchone()
+    conn.close()
+
+    if resultado:
+        return jsonify({"mensagem": "Login bem-sucedido", "usuario": usuario}), 200
+    else:
+        return jsonify({"erro": "Usuário ou senha inválidos"}), 401
+
+    
 @app.route("/api/adicionar", methods=["POST"])
 def adicionar():
     dados = request.json

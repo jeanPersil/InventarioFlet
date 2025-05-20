@@ -1,3 +1,17 @@
+export function realizarLogin({ user, senha }) {
+  return fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ user, senha }),
+  }).then((resposta) => {
+    if (resposta.status === 200) {
+      return (window.location.href = "/api/pagAdicionar");
+    } else {
+      alert("usuario ou senha invalidos!");
+    }
+  });
+}
+
 export function adicionarProduto({ nome, preco, quantidade }) {
   return fetch("/api/adicionar", {
     method: "POST",
